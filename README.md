@@ -26,11 +26,11 @@ flowchart LR
 ```mermaid
 flowchart TB
     subgraph Browser
-        UI[Textarea + button]
-        JS[Popcorn JS bridge]
-        WASM[AtomVM (Wasm)]
-        AVM[bundle.avm]
-        EVAL[Code.eval_string/3]
+        UI["Textarea + button"]
+        JS["Popcorn JS bridge"]
+        WASM["AtomVM (Wasm)"]
+        AVM["bundle.avm"]
+        EVAL["Code.eval_string/3"]
         UI -->|code input| JS
         JS -->|load| AVM
         JS -->|call| WASM
