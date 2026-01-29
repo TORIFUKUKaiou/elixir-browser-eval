@@ -4,7 +4,7 @@ Run Elixir code directly in your browser. No server required. No installation ne
 
 ## Demo
 
-https://torifukukaiou.github.io/elixir-browser-eval/
+https://elixir-browser-eval.torifuku-kaiou.app/
 
 ## What is WebAssembly (Wasm)?
 
