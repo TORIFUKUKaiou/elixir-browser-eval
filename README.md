@@ -63,7 +63,7 @@ mix deps.get
 mix popcorn.cook
 ```
 
-The `static/` directory is deployed to GitHub Pages as-is.
+The `static/` directory is deployed to Cloudflare Pages as-is.
 
 ## Credits
 
