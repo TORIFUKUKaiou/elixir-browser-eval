@@ -8,18 +8,17 @@ https://elixir-browser-eval.torifuku-kaiou.app/
 
 ## What is WebAssembly (Wasm)?
 
-WebAssembly is a binary instruction format that runs in modern browsers at near-native speed. It allows languages like C, Rust, and now Elixir to run in the browser alongside JavaScript.
+WebAssembly is a compact binary format that runs safely inside modern browsers. It lets non-JavaScript languages run in the browser by compiling them into Wasm modules that execute alongside JavaScript.
 
 ```mermaid
 flowchart LR
-    subgraph Traditional
-        A[JavaScript] --> B[Browser JS Engine]
+    subgraph Browser
+        JS[JavaScript] --> JSE[JS Engine]
+        WASM[Wasm Module] --> WR[Wasm Runtime]
     end
-    subgraph WebAssembly
-        C[Elixir/Erlang] --> D[BEAM Bytecode]
-        D --> E[AtomVM Wasm]
-        E --> F[Browser Wasm Runtime]
-    end
+    ELX[Elixir/Erlang source] --> BEAM[BEAM bytecode]
+    BEAM --> AVM[AtomVM compiled to Wasm]
+    AVM --> WR
 ```
 
 ## How it works
@@ -27,16 +26,17 @@ flowchart LR
 ```mermaid
 flowchart TB
     subgraph Browser
-        UI[textarea + button]
-        Popcorn[Popcorn JS ↔ Wasm Bridge]
-        AtomVM[AtomVM WebAssembly]
-        Eval[Code.eval_string/3]
-        
-        UI -->|code input| Popcorn
-        Popcorn -->|call| AtomVM
-        AtomVM --> Eval
-        Eval -->|result| Popcorn
-        Popcorn -->|display| UI
+        UI[Textarea + button]
+        JS[Popcorn JS bridge]
+        WASM[AtomVM (Wasm)]
+        AVM[bundle.avm]
+        EVAL[Code.eval_string/3]
+        UI -->|code input| JS
+        JS -->|load| AVM
+        JS -->|call| WASM
+        WASM --> EVAL
+        EVAL -->|result| JS
+        JS -->|display| UI
     end
 ```
 
